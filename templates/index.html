@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    
+</head>
+<body style="background-color: antiquewhite;">
+    <h1 style="text-align: center; padding: 50px;">Rotate.js</h1>
+    
+    <div class="container shadow p-3 mb-5 bg-white rounded" style="width: 500px;">
+        <p style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Welcome to rotate.js. Rotate the picture until it is in the correct orientation, then press the check button</p>
+        <b><p style="text-align: center; color: aliceblue; background-color: black;" id="result">...</p></b>
+        <div class="row">
+            <!-- Left box -->
+
+            <div class=".col-" style="margin-top: 50px; margin-right: 10px; margin-left: auto;">
+                <button id="button" type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                  </svg>
+                </button>
+            </div>
+            
+            <!-- Center box -->
+            <div class=".col-">
+                <!-- The source is purposely left empty so that the image doesn't load twice -->
+                <div id="container">
+                    <img style="align-content: center;" src="" alt="a fox" id="image">
+                </div>
+                             
+            </div>
+            <!-- Right box -->
+            <div class=".col-" style="margin-top: 50px; margin-left: 10px; margin-right: auto;">
+                <button id="button1" type="button" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                  </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    
+    <div class="text-center" style="padding: 20px;">
+        <button id="check" type="button" class="btn btn-dark">Check!</button>
+    </div>
+    <div class="text-center" style="padding: 20px;">
+        <button id="retry" type="button" class="btn btn-dark">Play Again!</button>
+    </div>
+    
+    
+
+    
+    <script>
+        // list of images so that once the user completes first iteration, the next image appears
+        img = document.getElementById('container');
+        let animals = ['cat','elephant', 'fox', 'lion', 'peecock', 'squirrel', 'zebra'];
+        var i = (Math.floor(Math.random() * 6));
+        var angle = (Math.floor(Math.random() * 4)) * 90;
+        img.className = "rotate" + angle;
+        document.getElementById('image').src = "../static/images/" + animals[i] + ".jpg";
+        
+        
+        
+
+        // rotate image clockwise
+        img = document.getElementById('container');
+        document.getElementById('button').onclick = function() {
+        angle = (angle + 90) % 360;
+        img.className = "rotate" + angle;
+        }
+        // rotate image anti-clockwise
+        img = document.getElementById('container');
+        document.getElementById('button1').onclick = function() {
+        angle = (angle - 90) % 360;
+        img.className = "rotate" + angle;
+        }
+        
+        // check if the image is in the correct orientation then display result
+        document.getElementById('check').onclick = function() {
+            if (angle == 0) {
+                document.getElementById('result').innerHTML = 'Correct!';
+                document.getElementById('result').style.backgroundColor = 'green';
+                gameOver();
+            }
+            else{
+                document.getElementById('result').innerHTML = "Wrong!";
+                document.getElementById('result').style.backgroundColor = 'red';
+                gameOver();
+            }
+        }
+
+        document.getElementById('retry').onclick = function() {
+            document.getElementById('image').src = "../static/images/" + animals[i] + ".jpg";
+            document.getElementById('result').innerHTML = '...';
+            document.getElementById('result').style.backgroundColor = 'black';
+            resetGame(); 
+            
+        }
+
+        // disable buttons so user can only click retry button
+        function gameOver() {
+            button.disabled = true;
+            button1.disabled = true;
+            check.disabled = true;
+        }
+
+        // enable all buttons reset parameters
+        function resetGame() {
+            
+            button.disabled = false;
+            button1.disabled = false;
+            check.disabled = false;
+            i = (Math.floor(Math.random() * 6));
+            angle = (Math.floor(Math.random() * 4)) * 90;
+            img.className = "rotate" + angle;
+
+        }
+        
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</body>
+</html>

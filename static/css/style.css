@@ -1,0 +1,55 @@
+#container {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+  #image {
+    transform-origin: top left;
+    /* IE 10+, Firefox, etc. */
+    -webkit-transform-origin: top left;
+    /* Chrome */
+    -ms-transform-origin: top left;
+    /* IE 9 */
+  }
+  /* clockwise rotation */
+  #container.rotate90 #image {
+    transform: rotate(90deg) translateY(-100%);
+    -webkit-transform: rotate(90deg) translateY(-100%);
+    -ms-transform: rotate(90deg) translateY(-100%);
+  }
+  #container.rotate180 #image {
+    transform: rotate(180deg) translate(-100%, -100%);
+    -webkit-transform: rotate(180deg) translate(-100%, -100%);
+    -ms-transform: rotate(180deg) translateX(-100%, -100%);
+  }
+  #container.rotate270 #image {
+    transform: rotate(270deg) translateX(-100%);
+    -webkit-transform: rotate(270deg) translateX(-100%);
+    -ms-transform: rotate(270deg) translateX(-100%);
+  }
+
+  #container.rotate-90 #image {
+    transform: rotate(-90deg) translateX(-100%);
+    -webkit-transform: rotate(-90deg) translateX(-100%);
+    -ms-transform: rotate(-90deg) translateX(-100%);
+
+  }
+  #container.rotate-180 #image {
+    transform: rotate(-180deg) translate(-100%, -100%);
+    -webkit-transform: rotate(-180deg) translate(-100%, -100%);
+    -ms-transform: rotate(-180deg) translateX(-100%, -100%);
+  }
+
+  #container.rotate-270 #image {
+    transform: rotate(-270deg) translateY(-100%);
+    -webkit-transform: rotate(-270deg) translateY(-100%);
+    -ms-transform: rotate(-270deg) translateY(-100%);
+  }
